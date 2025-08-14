@@ -390,5 +390,152 @@
         "question": "How do you usually spend your weekends?",
         "accent": "South_African",
         "filename": "question_56_B1_South_African.mp3"
+    },
+    {
+        "id": 57,
+        "level": "C2",
+        "question": "Considering the pervasive influence of social media algorithms, how effectively can we discern genuine human connection from curated online personas?",
+        "accent": "Canadian",
+        "filename": "question_57_C2_Canadian.mp3"
+    },
+    {
+        "id": 58,
+        "level": "C2",
+        "question": "To what extent does the perceived ephemerality of digital information impact our collective historical memory?",
+        "accent": "Irish",
+        "filename": "question_58_C2_Irish.mp3"
+    },
+    {
+        "id": 59,
+        "level": "C2",
+        "question": "How has the rise of remote work fundamentally altered the traditional concept of workplace culture?",
+        "accent": "South_African",
+        "filename": "question_59_C2_South_African.mp3"
+    },
+    {
+        "id": 60,
+        "level": "C2",
+        "question": "What unforeseen societal consequences might arise from widespread adoption of personalized genetic engineering?",
+        "accent": "Irish",
+        "filename": "question_60_C2_Irish.mp3"
+    },
+    {
+        "id": 61,
+        "level": "C2",
+        "question": "How might advancements in AI impact the future of artistic expression?",
+        "accent": "Australian",
+        "filename": "question_61_C2_Australian.mp3"
+    },
+    {
+        "id": 62,
+        "level": "B1",
+        "question": "What's your favorite way to relax after a long day at work?",
+        "accent": "British",
+        "filename": "question_62_B1_British.mp3"
+    },
+    {
+        "id": 63,
+        "level": "B1",
+        "question": "Have you ever tried making your own bread?",
+        "accent": "British",
+        "filename": "question_63_B1_British.mp3"
+    },
+    {
+        "id": 64,
+        "level": "B1",
+        "question": "Do you prefer to read physical books or ebooks?",
+        "accent": "South_African",
+        "filename": "question_64_B1_South_African.mp3"
+    },
+    {
+        "id": 65,
+        "level": "B1",
+        "question": "What's the most interesting app on your phone and why?",
+        "accent": "British",
+        "filename": "question_65_B1_British.mp3"
+    },
+    {
+        "id": 66,
+        "level": "B1",
+        "question": "What kind of music do you usually listen to while commuting?",
+        "accent": "Irish",
+        "filename": "question_66_B1_Irish.mp3"
+    },
+    {
+        "id": 67,
+        "level": "B1",
+        "question": "How often do you use public transportation?",
+        "accent": "Australian",
+        "filename": "question_67_B1_Australian.mp3"
+    },
+    {
+        "id": 68,
+        "level": "B1",
+        "question": "What's your opinion on using social media for job searching?",
+        "accent": "Canadian",
+        "filename": "question_68_B1_Canadian.mp3"
+    },
+    {
+        "id": 69,
+        "level": "B1",
+        "question": "What's one thing you always bring with you when you travel?",
+        "accent": "American",
+        "filename": "question_69_B1_American.mp3"
+    },
+    {
+        "id": 70,
+        "level": "B1",
+        "question": "Do you think robots will replace human jobs in the future?",
+        "accent": "American",
+        "filename": "question_70_B1_American.mp3"
+    },
+    {
+        "id": 71,
+        "level": "B1",
+        "question": "What's your favourite type of weather for a picnic?",
+        "accent": "American",
+        "filename": "question_71_B1_American.mp3"
+    },
+    {
+        "id": 72,
+        "level": "B2",
+        "question": "How has social media impacted your approach to planning holidays?",
+        "accent": "Indian",
+        "filename": "question_72_B2_Indian.mp3"
+    },
+    {
+        "id": 73,
+        "level": "B2",
+        "question": "Do you prefer cooking elaborate meals or quick, simple ones?",
+        "accent": "Canadian",
+        "filename": "question_73_B2_Canadian.mp3"
+    },
+    {
+        "id": 74,
+        "level": "B2",
+        "question": "What's the most unusual souvenir you've ever brought back from a trip?",
+        "accent": "Australian",
+        "filename": "question_74_B2_Australian.mp3"
+    },
+    {
+        "id": 75,
+        "level": "B2",
+        "question": "What's the biggest technological advancement you've seen in your lifetime?",
+        "accent": "Canadian",
+        "filename": "question_75_B2_Canadian.mp3"
+    },
+    {
+        "id": 76,
+        "level": "B2",
+        "question": "Have you ever considered learning a new skill online?",
+        "accent": "Australian",
+        "filename": "question_76_B2_Australian.mp3"
+    },
+    {
+        "id": 77,
+        "level": "B2",
+        "question": "What's your opinion on the increasing use of AI in everyday life?",
+        "accent": "South_African",
+        "filename": "question_77_B2_South_African.mp3"
     }
 ]
