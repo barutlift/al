@@ -537,5 +537,362 @@
         "question": "What's your opinion on the increasing use of AI in everyday life?",
         "accent": "South_African",
         "filename": "question_77_B2_South_African.mp3"
+    },
+    {
+        "id": 78,
+        "level": "B2",
+        "question": "How has the rise of social media impacted your personal relationships?",
+        "accent": "Indian",
+        "filename": "question_78_B2_Indian.mp3"
+    },
+    {
+        "id": 79,
+        "level": "B2",
+        "question": "Do you prefer learning new skills online or in a classroom setting?",
+        "accent": "Canadian",
+        "filename": "question_79_B2_Canadian.mp3"
+    },
+    {
+        "id": 80,
+        "level": "B2",
+        "question": "What's the most memorable meal you've ever had and why?",
+        "accent": "Canadian",
+        "filename": "question_80_B2_Canadian.mp3"
+    },
+    {
+        "id": 81,
+        "level": "B2",
+        "question": "What challenges do you find when balancing work and personal life?",
+        "accent": "British",
+        "filename": "question_81_B2_British.mp3"
+    },
+    {
+        "id": 82,
+        "level": "B2",
+        "question": "Have you ever considered learning a musical instrument in your spare time?",
+        "accent": "Indian",
+        "filename": "question_82_B2_Indian.mp3"
+    },
+    {
+        "id": 83,
+        "level": "B2",
+        "question": "What's your favourite way to unwind after a long day at work?",
+        "accent": "Irish",
+        "filename": "question_83_B2_Irish.mp3"
+    },
+    {
+        "id": 84,
+        "level": "B2",
+        "question": "What innovative solution have you encountered recently that impressed you?",
+        "accent": "British",
+        "filename": "question_84_B2_British.mp3"
+    },
+    {
+        "id": 85,
+        "level": "B2",
+        "question": "What's one significant change you've noticed in your neighbourhood recently?",
+        "accent": "New_Zealand",
+        "filename": "question_85_B2_New_Zealand.mp3"
+    },
+    {
+        "id": 86,
+        "level": "B2",
+        "question": "What's your opinion on the increasing use of artificial intelligence in everyday life?",
+        "accent": "South_African",
+        "filename": "question_86_B2_South_African.mp3"
+    },
+    {
+        "id": 87,
+        "level": "B2",
+        "question": "What's the most frustrating aspect of using public transportation in your city?",
+        "accent": "British",
+        "filename": "question_87_B2_British.mp3"
+    },
+    {
+        "id": 88,
+        "level": "B2",
+        "question": "How has the rise of social media impacted your personal relationships?",
+        "accent": "American",
+        "filename": "question_88_B2_American.mp3"
+    },
+    {
+        "id": 89,
+        "level": "B2",
+        "question": "What's your favourite way to unwind after a long day at work?",
+        "accent": "Irish",
+        "filename": "question_89_B2_Irish.mp3"
+    },
+    {
+        "id": 90,
+        "level": "B2",
+        "question": "Do you prefer cooking elaborate meals or quick and easy snacks?",
+        "accent": "Irish",
+        "filename": "question_90_B2_Irish.mp3"
+    },
+    {
+        "id": 91,
+        "level": "B2",
+        "question": "What innovative technology are you most excited to see developed in the next decade?",
+        "accent": "British",
+        "filename": "question_91_B2_British.mp3"
+    },
+    {
+        "id": 92,
+        "level": "B2",
+        "question": "Have you ever considered learning a new musical instrument?",
+        "accent": "Irish",
+        "filename": "question_92_B2_Irish.mp3"
+    },
+    {
+        "id": 93,
+        "level": "B1",
+        "question": "If you could only choose one country to visit for the rest of your life, what would it be and why is it so special to you?",
+        "accent": "South_African",
+        "filename": "question_93_B1_South_African.mp3"
+    },
+    {
+        "id": 94,
+        "level": "B1",
+        "question": "Considering that you enjoy trying new things, have you ever thought about learning a completely different type of cuisine, like maybe Vietnamese or Ethiopian?",
+        "accent": "American",
+        "filename": "question_94_B1_American.mp3"
+    },
+    {
+        "id": 95,
+        "level": "B1",
+        "question": "What's the most interesting thing you've learned recently and how has it changed the way you think about something?",
+        "accent": "British",
+        "filename": "question_95_B1_British.mp3"
+    },
+    {
+        "id": 96,
+        "level": "B1",
+        "question": "Imagine you had a free day next week; what's one activity you'd really like to do and who would you want to do it with?",
+        "accent": "British",
+        "filename": "question_96_B1_British.mp3"
+    },
+    {
+        "id": 97,
+        "level": "B1",
+        "question": "If you could change one thing about how you use your phone every day, what would it be and why would you change it?",
+        "accent": "Indian",
+        "filename": "question_97_B1_Indian.mp3"
+    },
+    {
+        "id": 98,
+        "level": "B1",
+        "question": "When you have free time on the weekends, do you prefer to relax at home or go out and do something active?",
+        "accent": "Indian",
+        "filename": "question_98_B1_Indian.mp3"
+    },
+    {
+        "id": 99,
+        "level": "B1",
+        "question": "Have you ever had to give a presentation at school or work and how did you prepare for it?",
+        "accent": "Australian",
+        "filename": "question_99_B1_Australian.mp3"
+    },
+    {
+        "id": 100,
+        "level": "B1",
+        "question": "What's your favorite way to spend a rainy afternoon when you can't go outside?",
+        "accent": "New_Zealand",
+        "filename": "question_100_B1_New_Zealand.mp3"
+    },
+    {
+        "id": 101,
+        "level": "B1",
+        "question": "Considering your current job, what's one thing you find challenging and what have you done to improve in that area?",
+        "accent": "South_African",
+        "filename": "question_101_B1_South_African.mp3"
+    },
+    {
+        "id": 102,
+        "level": "B1",
+        "question": "Besides cooking, what other creative hobby do you enjoy, and how often do you get to practice it?",
+        "accent": "South_African",
+        "filename": "question_102_B1_South_African.mp3"
+    },
+    {
+        "id": 103,
+        "level": "A2",
+        "question": "Do you usually take the bus or walk to your English class every week?",
+        "accent": "Canadian",
+        "filename": "question_103_A2_Canadian.mp3"
+    },
+    {
+        "id": 104,
+        "level": "A2",
+        "question": "What kind of music do you like to listen to when you are doing your homework?",
+        "accent": "Indian",
+        "filename": "question_104_A2_Indian.mp3"
+    },
+    {
+        "id": 105,
+        "level": "A2",
+        "question": "Can you tell me about your favorite thing to eat for breakfast on the weekends?",
+        "accent": "New_Zealand",
+        "filename": "question_105_A2_New_Zealand.mp3"
+    },
+    {
+        "id": 106,
+        "level": "A2",
+        "question": "Is there a park near your house where you like to go for a walk sometimes?",
+        "accent": "Canadian",
+        "filename": "question_106_A2_Canadian.mp3"
+    },
+    {
+        "id": 107,
+        "level": "A2",
+        "question": "What time do you usually finish work and what do you do after that?",
+        "accent": "Canadian",
+        "filename": "question_107_A2_Canadian.mp3"
+    },
+    {
+        "id": 108,
+        "level": "A2",
+        "question": "When you visit your family, do you often help them to cook dinner?",
+        "accent": "Canadian",
+        "filename": "question_108_A2_Canadian.mp3"
+    },
+    {
+        "id": 109,
+        "level": "A2",
+        "question": "What is your favorite animal and why do you think it is interesting?",
+        "accent": "New_Zealand",
+        "filename": "question_109_A2_New_Zealand.mp3"
+    },
+    {
+        "id": 110,
+        "level": "A2",
+        "question": "If you go to the beach, what activities do you like to do there?",
+        "accent": "British",
+        "filename": "question_110_A2_British.mp3"
+    },
+    {
+        "id": 111,
+        "level": "A2",
+        "question": "On your phone, do you prefer playing games or watching short videos?",
+        "accent": "American",
+        "filename": "question_111_A2_American.mp3"
+    },
+    {
+        "id": 112,
+        "level": "A2",
+        "question": "Do you want to learn how to make a pizza this weekend or would you rather go to the cinema?",
+        "accent": "South_African",
+        "filename": "question_112_A2_South_African.mp3"
+    },
+    {
+        "id": 113,
+        "level": "A2",
+        "question": "What do you usually eat for breakfast on the weekends, and where do you buy it?",
+        "accent": "Canadian",
+        "filename": "question_113_A2_Canadian.mp3"
+    },
+    {
+        "id": 114,
+        "level": "A2",
+        "question": "Can you tell me about your favorite hobby, and how much time do you spend doing it each week?",
+        "accent": "Australian",
+        "filename": "question_114_A2_Australian.mp3"
+    },
+    {
+        "id": 115,
+        "level": "A2",
+        "question": "Do you like listening to music on the bus, and what kind of music is it?",
+        "accent": "Irish",
+        "filename": "question_115_A2_Irish.mp3"
+    },
+    {
+        "id": 116,
+        "level": "A2",
+        "question": "When you go to the supermarket, what is one thing you always buy?",
+        "accent": "Irish",
+        "filename": "question_116_A2_Irish.mp3"
+    },
+    {
+        "id": 117,
+        "level": "A2",
+        "question": "What is your favorite animal, and can you draw it for me?",
+        "accent": "American",
+        "filename": "question_117_A2_American.mp3"
+    },
+    {
+        "id": 118,
+        "level": "A2",
+        "question": "If you go to a restaurant with your family, what kind of food do you all like to eat there?",
+        "accent": "Canadian",
+        "filename": "question_118_A2_Canadian.mp3"
+    },
+    {
+        "id": 119,
+        "level": "A2",
+        "question": "After school, do you prefer to watch TV or play video games with your friends?",
+        "accent": "South_African",
+        "filename": "question_119_A2_South_African.mp3"
+    },
+    {
+        "id": 120,
+        "level": "A2",
+        "question": "What time do you usually go to bed on a school night, and do you read before sleep?",
+        "accent": "South_African",
+        "filename": "question_120_A2_South_African.mp3"
+    },
+    {
+        "id": 121,
+        "level": "A2",
+        "question": "Does your family have a car, and where do you usually drive to on Saturdays?",
+        "accent": "Australian",
+        "filename": "question_121_A2_Australian.mp3"
+    },
+    {
+        "id": 122,
+        "level": "A2",
+        "question": "Is there a park near your house, and do you often go there for a walk?",
+        "accent": "South_African",
+        "filename": "question_122_A2_South_African.mp3"
+    },
+    {
+        "id": 123,
+        "level": "A2",
+        "question": "If you could learn one new language, which one would it be and why?",
+        "accent": "Australian",
+        "filename": "question_123_A2_Australian.mp3"
+    },
+    {
+        "id": 124,
+        "level": "A2",
+        "question": "What kind of movies do you enjoy watching at home on Friday evenings?",
+        "accent": "American",
+        "filename": "question_124_A2_American.mp3"
+    },
+    {
+        "id": 125,
+        "level": "A2",
+        "question": "Can you describe the clothes you like to wear when you visit your grandparents?",
+        "accent": "American",
+        "filename": "question_125_A2_American.mp3"
+    },
+    {
+        "id": 126,
+        "level": "A2",
+        "question": "If you could travel to any country for a holiday, which country would you choose and why?",
+        "accent": "Irish",
+        "filename": "question_126_A2_Irish.mp3"
+    },
+    {
+        "id": 127,
+        "level": "A2",
+        "question": "What is your favorite color, and do you have anything in your room that is that color?",
+        "accent": "Irish",
+        "filename": "question_127_A2_Irish.mp3"
+    },
+    {
+        "id": 128,
+        "level": "A2",
+        "question": "Can you tell me about a book you have read, and did you enjoy reading it?",
+        "accent": "British",
+        "filename": "question_128_A2_British.mp3"
     }
 ]
