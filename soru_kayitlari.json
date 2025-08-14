@@ -285,5 +285,110 @@
         "question": "How might the increasing prevalence of AI-generated content impact the authenticity and value of artistic expression?",
         "accent": "New_Zealand",
         "filename": "question_41_C2_New_Zealand.mp3"
+    },
+    {
+        "id": 42,
+        "level": "C1",
+        "question": "Considering the ethical implications of AI, what are your reservations about its increasing integration into everyday life?",
+        "accent": "Australian",
+        "filename": "question_42_C1_Australian.mp3"
+    },
+    {
+        "id": 43,
+        "level": "C1",
+        "question": "How has the rise of social media impacted genuine interpersonal relationships in your opinion?",
+        "accent": "American",
+        "filename": "question_43_C1_American.mp3"
+    },
+    {
+        "id": 44,
+        "level": "C1",
+        "question": "What unforeseen challenges did you encounter during your last major renovation project?",
+        "accent": "British",
+        "filename": "question_44_C1_British.mp3"
+    },
+    {
+        "id": 45,
+        "level": "C1",
+        "question": "To what extent do you believe that culinary traditions reflect a region's cultural identity?",
+        "accent": "Irish",
+        "filename": "question_45_C1_Irish.mp3"
+    },
+    {
+        "id": 46,
+        "level": "C1",
+        "question": "What nuanced differences have you observed between formal and informal communication styles in your professional environment?",
+        "accent": "New_Zealand",
+        "filename": "question_46_C1_New_Zealand.mp3"
+    },
+    {
+        "id": 47,
+        "level": "B1",
+        "question": "What's your favourite way to relax after a long day at work?",
+        "accent": "Irish",
+        "filename": "question_47_B1_Irish.mp3"
+    },
+    {
+        "id": 48,
+        "level": "B1",
+        "question": "Do you prefer cooking at home or eating out at restaurants?",
+        "accent": "New_Zealand",
+        "filename": "question_48_B1_New_Zealand.mp3"
+    },
+    {
+        "id": 49,
+        "level": "B1",
+        "question": "Have you ever tried online language learning?",
+        "accent": "Indian",
+        "filename": "question_49_B1_Indian.mp3"
+    },
+    {
+        "id": 50,
+        "level": "B1",
+        "question": "What kind of music do you usually listen to when you're exercising?",
+        "accent": "Canadian",
+        "filename": "question_50_B1_Canadian.mp3"
+    },
+    {
+        "id": 51,
+        "level": "B1",
+        "question": "What's the most interesting thing you've learned recently?",
+        "accent": "New_Zealand",
+        "filename": "question_51_B1_New_Zealand.mp3"
+    },
+    {
+        "id": 52,
+        "level": "B1",
+        "question": "How often do you use public transport?",
+        "accent": "American",
+        "filename": "question_52_B1_American.mp3"
+    },
+    {
+        "id": 53,
+        "level": "B1",
+        "question": "What is one thing you always take with you when you travel?",
+        "accent": "Australian",
+        "filename": "question_53_B1_Australian.mp3"
+    },
+    {
+        "id": 54,
+        "level": "B1",
+        "question": "What's your opinion on using social media to connect with friends and family?",
+        "accent": "American",
+        "filename": "question_54_B1_American.mp3"
+    },
+    {
+        "id": 55,
+        "level": "B1",
+        "question": "What apps do you use to stay organised?",
+        "accent": "Indian",
+        "filename": "question_55_B1_Indian.mp3"
+    },
+    {
+        "id": 56,
+        "level": "B1",
+        "question": "How do you usually spend your weekends?",
+        "accent": "South_African",
+        "filename": "question_56_B1_South_African.mp3"
     }
 ]
