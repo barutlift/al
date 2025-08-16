@@ -124,7 +124,7 @@
                 currentAudio.pause();
             }
             const currentQuestion = shuffledQuestions[currentIndex];
-            const audioPath = `audio/${currentQuestion.filename}`;
+            const audioPath = `audios/${currentQuestion.filename}`;
             currentAudio = new Audio(audioPath);
             currentAudio.play().catch(error => {
                 console.error("Error playing audio:", error);
