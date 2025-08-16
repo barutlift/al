@@ -49,42 +49,50 @@
     </div>
 
     <script>
-        // --- GÜNCELLEME: Artık verileri manuel yapıştırmıyoruz! ---
-        // JavaScript, 'soru_kayitlari.json' dosyasını kendisi okuyacak.
-        
+        // --- Element Seçimleri ---
         const questionTextElement = document.getElementById('question-text');
         const counterElement = document.getElementById('counter');
         const playButton = document.getElementById('play-btn');
         const nextButton = document.getElementById('next-btn');
         const resetButton = document.getElementById('reset-btn');
 
-        let questions = [];
+        // --- Değişkenler ---
+        let allQuestions = [];
         let shuffledQuestions = [];
         let currentIndex = 0;
         let currentAudio = null;
+        
+        // --- DİKKAT: JSON dosyanızın adını buraya doğru yazdığınızdan emin olun! ---
+        const JSON_FILE_NAME = 'engaqus.json';
+        
+        // --- DİKKAT: Python script'inin oluşturduğu ses klasörünün adını buraya yazın! ---
+        const AUDIO_FOLDER_NAME = 'audious';
 
-        // JSON dosyasını okuyan ve oynatıcıyı başlatan fonksiyon
+
+        // --- Fonksiyonlar ---
+
+        // JSON dosyasını okuyan ve oynatıcıyı başlatan ana fonksiyon
         async function initializePlayer() {
             try {
-                // fetch API'si ile JSON dosyasını çekiyoruz
-                const response = await fetch('engaqus.json');
+                const response = await fetch(JSON_FILE_NAME);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const jsonData = await response.json();
 
                 if (jsonData && jsonData.length > 0) {
-                    questions = [...jsonData];
+                    allQuestions = [...jsonData];
                     shuffleAndReset();
                 } else {
-                    showError("No questions found in 'soru_kayitlari.json'.");
+                    showError(`No questions found in '${JSON_FILE_NAME}'.`);
                 }
             } catch (error) {
                 console.error("Could not load question data:", error);
-                showError("Error: 'soru_kayitlari.json' file could not be found or is invalid. Make sure it's in the same directory as this HTML file.");
+                showError(`Error: '${JSON_FILE_NAME}' file could not be found or is invalid. Make sure it's in the same directory as this HTML file.`);
             }
         }
         
+        // Ekranda hata mesajı gösterir ve butonları pasif hale getirir
         function showError(message) {
             questionTextElement.textContent = message;
             playButton.disabled = true;
@@ -95,6 +103,7 @@
             resetButton.classList.add('opacity-50', 'cursor-not-allowed');
         }
 
+        // Mevcut soruyu ekranda gösterir
         function displayQuestion() {
             if (shuffledQuestions.length === 0) return;
             const currentQuestion = shuffledQuestions[currentIndex];
@@ -102,8 +111,10 @@
             counterElement.textContent = `${currentIndex + 1}/${shuffledQuestions.length}`;
         }
 
+        // Soruları karıştırır ve sayacı sıfırlar
         function shuffleAndReset() {
-            shuffledQuestions = [...questions];
+            shuffledQuestions = [...allQuestions];
+            // Fisher-Yates shuffle algoritması
             for (let i = shuffledQuestions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
@@ -112,30 +123,41 @@
             displayQuestion();
         }
 
+        // Bir sonraki soruya geçer
         function nextQuestion() {
             if (shuffledQuestions.length === 0) return;
             currentIndex = (currentIndex + 1) % shuffledQuestions.length;
             displayQuestion();
         }
 
+        // Mevcut sorunun ses dosyasını çalar
         function playSound() {
             if (shuffledQuestions.length === 0) return;
+            
+            // Eğer önceki ses çalıyorsa durdur
             if (currentAudio) {
                 currentAudio.pause();
             }
+
             const currentQuestion = shuffledQuestions[currentIndex];
-            const audioPath = `audios/${currentQuestion.filename}`;
+            
+            // *** ÖNEMLİ DÜZELTME: Ses dosyasının yolu artık sorunun 'id'si kullanılarak oluşturuluyor ***
+            // Örnek: ingilizce_soru_sesleri/101.mp3
+            const audioPath = `${AUDIO_FOLDER_NAME}/${currentQuestion.id}.mp3`;
+            
             currentAudio = new Audio(audioPath);
             currentAudio.play().catch(error => {
-                console.error("Error playing audio:", error);
-                questionTextElement.textContent = `Error: Could not find audio file at '${audioPath}'.`;
+                console.error(`Error playing audio: ${error}. Tried to play: ${audioPath}`);
+                questionTextElement.textContent = `Error: Could not find or play audio file. Looked for: '${audioPath}'.`;
             });
         }
 
+        // --- Olay Dinleyicileri (Event Listeners) ---
         playButton.addEventListener('click', playSound);
         nextButton.addEventListener('click', nextQuestion);
         resetButton.addEventListener('click', shuffleAndReset);
         
+        // Sayfa yüklendiğinde oynatıcıyı başlat
         document.addEventListener('DOMContentLoaded', initializePlayer);
     </script>
 </body>
