@@ -67,7 +67,7 @@
         async function initializePlayer() {
             try {
                 // fetch API'si ile JSON dosyasını çekiyoruz
-                const response = await fetch('soru_kayitlari.json');
+                const response = await fetch('engaqus.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -124,7 +124,7 @@
                 currentAudio.pause();
             }
             const currentQuestion = shuffledQuestions[currentIndex];
-            const audioPath = `ingilizce_soru_sesleri/${currentQuestion.filename}`;
+            const audioPath = `audio/${currentQuestion.filename}`;
             currentAudio = new Audio(audioPath);
             currentAudio.play().catch(error => {
                 console.error("Error playing audio:", error);
