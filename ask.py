@@ -1,13 +1,12 @@
+# Gerekli kütüphaneleri içe aktar
+# gTTS'i yüklemek için terminalde 'pip install gTTS' komutunu çalıştırın.
+from gtts import gTTS
 import json
 import os
 import random
-from gtts import gTTS
+import time
 
-# --- Ayarlar ---
-JSON_FILE_PATH = 'engaqus.json'
-AUDIO_FOLDER_PATH = 'audios'
-
-# Kullanılacak aksanlar ve gTTS için karşılık gelen 'tld' (top-level domain) değerleri
+# Kullanılacak aksanlar ve gTTS'in kullandığı TLD (Top-Level Domain) eşleşmeleri
 ACCENTS = {
     'American': 'com',
     'British': 'co.uk',
@@ -18,74 +17,80 @@ ACCENTS = {
     'South_African': 'co.za',
 }
 
-def create_audio_files():
-    """
-    JSON dosyasını okur ve her soru için, eğer zaten mevcut değilse,
-    rastgele bir aksanla ses dosyası oluşturur.
-    """
-    print("Seslendirme script'i başlatıldı...")
+# Giriş ve çıkış dosyalarının/klasörlerinin adları
+JSON_FILE = 'engaqus.json'
+OUTPUT_DIR = 'audios'
 
-    # 1. Ses dosyalarının kaydedileceği klasörün varlığını kontrol et, yoksa oluştur.
-    if not os.path.exists(AUDIO_FOLDER_PATH):
-        print(f"'{AUDIO_FOLDER_PATH}' klasörü bulunamadı, oluşturuluyor...")
-        os.makedirs(AUDIO_FOLDER_PATH)
-    else:
-        print(f"'{AUDIO_FOLDER_PATH}' klasörü zaten mevcut.")
+def generate_audio_files():
+    """
+    JSON dosyasını okur, içindeki tüm soruları ve takip sorularını
+    rastgele aksanlarla seslendirir ve ID'leri ile .mp3 olarak kaydeder.
+    """
+    # Ses dosyalarının kaydedileceği klasörü oluştur (eğer yoksa)
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+        print(f"'{OUTPUT_DIR}' klasörü oluşturuldu.")
 
-    # 2. JSON dosyasını oku ve verileri yükle.
+    # JSON dosyasını yükle
     try:
-        with open(JSON_FILE_PATH, 'r', encoding='utf-8') as f:
-            questions = json.load(f)
-        print(f"'{JSON_FILE_PATH}' dosyasından {len(questions)} adet soru başarıyla yüklendi.")
+        with open(JSON_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
     except FileNotFoundError:
-        print(f"HATA: '{JSON_FILE_PATH}' dosyası bulunamadı. Lütfen dosyanın doğru yerde olduğundan emin olun.")
+        print(f"HATA: '{JSON_FILE}' dosyası bulunamadı. Lütfen dosyanın doğru yerde olduğundan emin olun.")
         return
     except json.JSONDecodeError:
-        print(f"HATA: '{JSON_FILE_PATH}' dosyası geçerli bir JSON formatında değil.")
+        print(f"HATA: '{JSON_FILE}' dosyası geçerli bir JSON formatında değil.")
         return
 
-    # 3. Her bir soruyu döngüye al ve ses dosyasını oluştur.
-    created_count = 0
-    skipped_count = 0
-    for item in questions:
-        try:
-            question_id = item['id']
-            question_text = item['question']
+    print("Ses dosyası oluşturma işlemi başlıyor...")
+    
+    # JSON verisi içinde döngüye başla
+    for level, categories in data.items():
+        for category_name, content in categories.items():
             
-            # Ses dosyasının adını ID'ye göre belirle (örn: 1.mp3, 2.mp3)
-            audio_file_path = os.path.join(AUDIO_FOLDER_PATH, f"{question_id}.mp3")
+            # Ana soruları işle
+            if 'questions' in content:
+                for question in content['questions']:
+                    process_text_item(question['id'], question['question'])
 
-            # Eğer bu ID'ye sahip ses dosyası zaten varsa, bu adımı atla.
-            if os.path.exists(audio_file_path):
-                # print(f"'{question_id}.mp3' zaten mevcut, atlanıyor.")
-                skipped_count += 1
-                continue
+            # Takip sorularını işle
+            if 'follow_ups' in content:
+                for followup in content['follow_ups']:
+                    process_text_item(followup['fu_id'], followup['text'])
+    
+    print("\nTüm ses dosyaları başarıyla oluşturuldu!")
 
-            # Eğer dosya yoksa, oluşturma işlemine başla.
-            print(f"'{question_id}.mp3' oluşturuluyor...")
-            
-            # Rastgele bir aksan seç
-            accent_name, tld = random.choice(list(ACCENTS.items()))
-            
-            # gTTS kullanarak metni sese çevir
-            tts = gTTS(text=question_text, lang='en', tld=tld, slow=False)
-            
-            # Ses dosyasını kaydet
-            tts.save(audio_file_path)
-            
-            print(f"-> '{question_id}.mp3' ({accent_name} aksanıyla) başarıyla oluşturuldu.")
-            created_count += 1
+def process_text_item(item_id, text_to_speak):
+    """
+    Verilen metni ve ID'yi işler, ses dosyasını oluşturur.
+    Eğer dosya zaten varsa, bu adımı atlar ve bir bildirim gösterir.
+    """
+    file_path = os.path.join(OUTPUT_DIR, f"{item_id}.mp3")
 
-        except KeyError:
-            print(f"UYARI: JSON içindeki bir öğede 'id' veya 'question' anahtarı eksik. Bu öğe atlanıyor: {item}")
-        except Exception as e:
-            print(f"HATA: '{question_id}' ID'li soru işlenirken bir hata oluştu: {e}")
+    # Eğer dosya zaten varsa, tekrar oluşturma ve kullanıcıyı bilgilendir
+    if os.path.exists(file_path):
+        print(f"Dosya zaten mevcut, atlanıyor: {item_id}.mp3")
+        return
 
-    print("\n--- İşlem Tamamlandı ---")
-    print(f"Yeni oluşturulan dosya sayısı: {created_count}")
-    print(f"Mevcut olduğu için atlanan dosya sayısı: {skipped_count}")
-    print(f"Ses dosyalarınızı '{AUDIO_FOLDER_PATH}' klasöründe bulabilirsiniz.")
+    try:
+        # Rastgele bir aksan seç
+        accent_name, tld = random.choice(list(ACCENTS.items()))
+
+        # gTTS nesnesini oluştur
+        tts = gTTS(text=text_to_speak, lang='en', tld=tld)
+
+        # Dosyayı kaydet
+        tts.save(file_path)
+
+        print(f"Oluşturuldu: {item_id}.mp3 ({accent_name} aksanı ile)")
+
+        # Google'ın sunucusuna çok sık istek göndermemek için kısa bir bekleme ekle
+        time.sleep(0.5)
+
+    except Exception as e:
+        print(f"HATA: {item_id} işlenirken bir sorun oluştu: {e}")
 
 
+# Script'i ana program olarak çalıştır
 if __name__ == "__main__":
-    create_audio_files()
+    generate_audio_files()

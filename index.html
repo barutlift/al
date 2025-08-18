@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al</title>
+    <title>İnteraktif Soru Pratiği</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,47 +19,78 @@
         .btn:active {
             transform: scale(0.95);
         }
+        .play-icon-btn {
+            transition: transform 0.2s, color 0.2s;
+        }
+        .play-icon-btn:hover {
+            color: #6366f1; /* indigo-500 */
+        }
+        .play-icon-btn:active {
+            transform: scale(0.90);
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white flex items-center justify-center h-screen">
 
-    <div id="player-container" class="w-full max-w-3xl mx-auto p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl flex flex-col text-center relative">
+    <div id="player-container" class="w-full max-w-3xl mx-auto p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl flex flex-col text-left relative">
         
         <div id="counter" class="absolute top-4 right-6 text-lg font-bold text-indigo-400">
             0/0
         </div>
 
-        <div class="flex-grow flex items-center justify-center min-h-[200px] md:min-h-[250px]">
-            <p id="question-text" class="text-2xl md:text-3xl font-medium leading-relaxed text-gray-200">
-                Loading questions...
-            </p>
+        <!-- Ana Soru Alanı -->
+        <div class="flex-grow min-h-[250px] md:min-h-[300px] flex flex-col space-y-4">
+            <div>
+                <h2 class="text-lg font-semibold text-indigo-400 mb-2">Soru</h2>
+                <div id="main-question-container" class="flex items-start space-x-4">
+                    <p id="main-question-text" class="text-2xl md:text-3xl font-medium leading-relaxed text-gray-200 flex-grow">
+                        Sorular yükleniyor...
+                    </p>
+                    <button id="main-play-btn" class="play-icon-btn text-gray-400 flex-shrink-0 mt-1" title="Sesi Oynat">
+                        <!-- SVG Play Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Follow-up Soruları Alanı -->
+            <div id="follow-ups-container" class="mt-4 space-y-3 pt-4 border-t border-gray-700">
+                <!-- Follow-up soruları buraya eklenecek -->
+            </div>
         </div>
 
+        <!-- Kontrol Butonları -->
         <div class="mt-8 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-            <button id="play-btn" class="btn w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                Play Sound
+            <button id="follow-up-btn" class="btn w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                Follow-up
             </button>
-            <button id="next-btn" class="btn w-full md:w-auto bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                Next Question
+            <button id="next-question-btn" class="btn w-full md:w-auto bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                Sıradaki Soru
             </button>
             <button id="reset-btn" class="btn w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                Shuffle & Reset
+                Karıştır & Sıfırla
             </button>
         </div>
     </div>
 
     <script>
         // --- Element Seçimleri ---
-        const questionTextElement = document.getElementById('question-text');
+        const mainQuestionTextElement = document.getElementById('main-question-text');
+        const mainPlayButton = document.getElementById('main-play-btn');
+        const followUpsContainer = document.getElementById('follow-ups-container');
         const counterElement = document.getElementById('counter');
-        const playButton = document.getElementById('play-btn');
-        const nextButton = document.getElementById('next-btn');
+        const followUpButton = document.getElementById('follow-up-btn');
+        const nextQuestionButton = document.getElementById('next-question-btn');
         const resetButton = document.getElementById('reset-btn');
 
         // --- Değişkenler ---
-        let allQuestions = [];
-        let shuffledQuestions = [];
-        let currentIndex = 0;
+        let allQuestionsData = {};
+        let flatQuestionList = [];
+        let shuffledIndices = [];
+        let currentIndex = -1;
+        let currentFollowUpIndex = 0;
         let currentAudio = null;
         
         // --- DİKKAT: JSON dosyanızın adını buraya doğru yazdığınızdan emin olun! ---
@@ -68,56 +99,112 @@
         // --- DİKKAT: Python script'inin oluşturduğu ses klasörünün adını buraya yazın! ---
         const AUDIO_FOLDER_NAME = 'audios';
 
-
         // --- Fonksiyonlar ---
 
         // JSON dosyasını okuyan ve oynatıcıyı başlatan ana fonksiyon
         async function initializePlayer() {
             try {
                 const response = await fetch(JSON_FILE_NAME);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const jsonData = await response.json();
+                if (!response.ok) throw new Error(`HTTP hatası! Durum: ${response.status}`);
+                
+                allQuestionsData = await response.json();
+                flattenQuestions();
 
-                if (jsonData && jsonData.length > 0) {
-                    allQuestions = [...jsonData];
+                if (flatQuestionList.length > 0) {
                     shuffleAndReset();
                 } else {
-                    showError(`No questions found in '${JSON_FILE_NAME}'.`);
+                    showError(`'${JSON_FILE_NAME}' dosyasında soru bulunamadı.`);
                 }
             } catch (error) {
-                console.error("Could not load question data:", error);
-                showError(`Error: '${JSON_FILE_NAME}' file could not be found or is invalid. Make sure it's in the same directory as this HTML file.`);
+                console.error("Soru verisi yüklenemedi:", error);
+                showError(`Hata: '${JSON_FILE_NAME}' dosyası bulunamadı veya geçersiz. Bu HTML dosyasıyla aynı dizinde olduğundan emin olun.`);
             }
         }
         
+        // Nested JSON'ı düz bir soru listesine çevirir
+        function flattenQuestions() {
+            flatQuestionList = [];
+            for (const level in allQuestionsData) {
+                for (const category in allQuestionsData[level]) {
+                    const questions = allQuestionsData[level][category].questions;
+                    questions.forEach(q => {
+                        flatQuestionList.push({ ...q, level, category });
+                    });
+                }
+            }
+        }
+
         // Ekranda hata mesajı gösterir ve butonları pasif hale getirir
         function showError(message) {
-            questionTextElement.textContent = message;
-            playButton.disabled = true;
-            nextButton.disabled = true;
-            resetButton.disabled = true;
-            playButton.classList.add('opacity-50', 'cursor-not-allowed');
-            nextButton.classList.add('opacity-50', 'cursor-not-allowed');
-            resetButton.classList.add('opacity-50', 'cursor-not-allowed');
+            mainQuestionTextElement.textContent = message;
+            const buttons = [followUpButton, nextQuestionButton, resetButton, mainPlayButton];
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            });
         }
 
-        // Mevcut soruyu ekranda gösterir
+        // Mevcut soruyu ve ilgili bilgileri ekranda gösterir
         function displayQuestion() {
-            if (shuffledQuestions.length === 0) return;
-            const currentQuestion = shuffledQuestions[currentIndex];
-            questionTextElement.textContent = currentQuestion.question;
-            counterElement.textContent = `${currentIndex + 1}/${shuffledQuestions.length}`;
+            if (shuffledIndices.length === 0) return;
+
+            // Follow-up'ları temizle ve butonu aktifleştir
+            followUpsContainer.innerHTML = '';
+            currentFollowUpIndex = 0;
+            followUpButton.disabled = false;
+            followUpButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            
+            const questionIndex = shuffledIndices[currentIndex];
+            const currentQuestion = flatQuestionList[questionIndex];
+            
+            mainQuestionTextElement.textContent = currentQuestion.question;
+            mainPlayButton.dataset.audioId = currentQuestion.id; // Ses ID'sini butona ata
+            
+            counterElement.textContent = `${currentIndex + 1}/${flatQuestionList.length}`;
         }
 
-        // Soruları karıştırır ve sayacı sıfırlar
+        // Bir sonraki follow-up sorusunu gösterir
+        function displayNextFollowUp() {
+            const questionIndex = shuffledIndices[currentIndex];
+            const currentQuestion = flatQuestionList[questionIndex];
+            const followUps = allQuestionsData[currentQuestion.level][currentQuestion.category].follow_ups;
+
+            if (currentFollowUpIndex >= followUps.length) {
+                followUpButton.disabled = true;
+                followUpButton.classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            const followUp = followUps[currentFollowUpIndex];
+            
+            const followUpElement = document.createElement('div');
+            followUpElement.className = 'flex items-start space-x-4 p-2 bg-gray-700/50 rounded-lg animate-fade-in';
+            
+            followUpElement.innerHTML = `
+                <p class="text-xl font-medium text-gray-300 flex-grow">${followUp.text}</p>
+                <button class="play-icon-btn text-gray-400 flex-shrink-0" data-audio-id="${followUp.fu_id}" title="Sesi Oynat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+                    </svg>
+                </button>
+            `;
+            
+            followUpsContainer.appendChild(followUpElement);
+            currentFollowUpIndex++;
+
+            if (currentFollowUpIndex >= followUps.length) {
+                followUpButton.disabled = true;
+                followUpButton.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Soru listesini karıştırır ve sayacı sıfırlar
         function shuffleAndReset() {
-            shuffledQuestions = [...allQuestions];
+            shuffledIndices = Array.from(Array(flatQuestionList.length).keys());
             // Fisher-Yates shuffle algoritması
-            for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+            for (let i = shuffledIndices.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+                [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
             }
             currentIndex = 0;
             displayQuestion();
@@ -125,37 +212,44 @@
 
         // Bir sonraki soruya geçer
         function nextQuestion() {
-            if (shuffledQuestions.length === 0) return;
-            currentIndex = (currentIndex + 1) % shuffledQuestions.length;
+            if (flatQuestionList.length === 0) return;
+            currentIndex = (currentIndex + 1) % flatQuestionList.length;
             displayQuestion();
         }
 
-        // Mevcut sorunun ses dosyasını çalar
-        function playSound() {
-            if (shuffledQuestions.length === 0) return;
+        // Belirtilen ID'ye sahip ses dosyasını çalar
+        function playSound(id) {
+            if (!id) return;
             
-            // Eğer önceki ses çalıyorsa durdur
             if (currentAudio) {
                 currentAudio.pause();
             }
 
-            const currentQuestion = shuffledQuestions[currentIndex];
-            
-            // *** ÖNEMLİ DÜZELTME: Ses dosyasının yolu artık sorunun 'id'si kullanılarak oluşturuluyor ***
-            // Örnek: ingilizce_soru_sesleri/101.mp3
-            const audioPath = `${AUDIO_FOLDER_NAME}/${currentQuestion.id}.mp3`;
-            
+            const audioPath = `${AUDIO_FOLDER_NAME}/${id}.mp3`;
             currentAudio = new Audio(audioPath);
             currentAudio.play().catch(error => {
-                console.error(`Error playing audio: ${error}. Tried to play: ${audioPath}`);
-                questionTextElement.textContent = `Error: Could not find or play audio file. Looked for: '${audioPath}'.`;
+                console.error(`Ses dosyası oynatılamadı: ${error}. Aranan dosya: ${audioPath}`);
+                alert(`Hata: '${audioPath}' ses dosyası bulunamadı veya oynatılamadı.`);
             });
         }
 
         // --- Olay Dinleyicileri (Event Listeners) ---
-        playButton.addEventListener('click', playSound);
-        nextButton.addEventListener('click', nextQuestion);
+        nextQuestionButton.addEventListener('click', nextQuestion);
         resetButton.addEventListener('click', shuffleAndReset);
+        followUpButton.addEventListener('click', displayNextFollowUp);
+
+        // Ana play butonu
+        mainPlayButton.addEventListener('click', (e) => {
+            playSound(e.currentTarget.dataset.audioId);
+        });
+
+        // Follow-up play butonları için olay delegasyonu
+        followUpsContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('.play-icon-btn');
+            if (button) {
+                playSound(button.dataset.audioId);
+            }
+        });
         
         // Sayfa yüklendiğinde oynatıcıyı başlat
         document.addEventListener('DOMContentLoaded', initializePlayer);
